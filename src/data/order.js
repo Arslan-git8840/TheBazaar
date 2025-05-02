@@ -1,0 +1,67 @@
+export const orders = [
+  {
+    id: "1",
+    orderNumber: "#390561",
+    date: "Jan 8",
+    status: "Paid",
+    total: 1620.0,
+    items: {
+      id: "item1",
+      name: "Ryobi ONE drill/driver",
+      price: 409.0,
+      image: "/nike.jpg",
+    },
+  },
+  {
+    id: "2",
+    orderNumber: "#663334",
+    date: "Jan 6",
+    status: "Delivered",
+    total: 1250.0,
+    items: {
+      id: "item6",
+      name: "Power drill XL-2000",
+      price: 450.0,
+      image: "/nike.jpg",
+    },
+  },
+  {
+    id: "3",
+    orderNumber: "#418135",
+    date: "Jan 5",
+    status: "Paid",
+    total: 540.95,
+    items: {
+      id: "item8",
+      name: "Garden hose extendable",
+      price: 89.95,
+      image: "/nike.jpg",
+    },
+  },
+  {
+    id: "4",
+    orderNumber: "#801999",
+    date: "Jan 2",
+    status: "Paid",
+    total: 1489.0,
+    items: {
+      id: "item10",
+      name: "Electric hedge trimmer",
+      price: 199.0,
+      image: "/nike.jpg",
+    },
+  },
+  {
+    id: "5",
+    orderNumber: "#517783",
+    date: "Dec 28",
+    status: "Completed",
+    total: 925.0,
+    items: {
+      id: "item12",
+      name: "Toolbox complete set",
+      price: 450.0,
+      image: "/nike.jpg",
+    },
+  },
+];

@@ -5,8 +5,12 @@ import {
   SignedIn,
   SignedOut,
   UserButton,
-} from '@clerk/nextjs'
+} from "@clerk/nextjs";
 import "./globals.css";
+import { Poppins, Urbanist } from "next/font/google";
+import { Provider } from "@/tanstack/provider";
+
+const font = Urbanist({ weight: ["400", "500"], subsets: ["latin"] });
 
 export const metadata = {
   title: "Bazaar",
@@ -16,16 +20,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className={``}>
-        {/* <header>
+      <html lang="en">
+        <body className={`${font.className}`}>
+          {/* <header>
           <SignedIn>
             <UserButton />
           </SignedIn>
         </header> */}
-        {children}
-      </body>
-    </html>
-  </ClerkProvider>
+          <Provider>{children}</Provider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
