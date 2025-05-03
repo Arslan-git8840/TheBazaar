@@ -7,9 +7,10 @@ import { ArrowLeft } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import axios from "axios";
 import { useState } from "react";
+import { useEContext } from "@/context/context";
 
 
-const Checkout = ({ params }) => {
+const Checkout = () => {
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -22,9 +23,9 @@ const Checkout = ({ params }) => {
 
 
   const { user } = useUser();
-  const [slugPart, id, quantity, price] = params.slug.split('q');
+  const { cartsItems } = useEContext();
+  console.log('cartsItems', cartsItems);
 
-  console.log(slugPart, id, quantity, price)
 
   const checkout = async () => {
     const fullName = `${firstName} ${lastName}`;
@@ -59,15 +60,28 @@ const Checkout = ({ params }) => {
 
       // step-5 save order to the database
 
-      const savedOrder = await axios.post('/api/order/save-order', {
-        user: userId,
-        product: id,
-        quantity,
-        price,
-        shippingAddress: addressId,
-        totalAmount: price*quantity,
-      })
-      console.log(savedOrder);
+      await Promise.all(
+        cartsItems.map(async (item) => {
+          const savedOrder = await axios.post('/api/order/save-order', {
+            user: userId,  
+            product: item.productId,  
+            quantity: item.quantity, 
+            price: item.price,  
+            shippingAddress: addressId, 
+            totalAmount: item.totalPrice,  
+          });
+          console.log(savedOrder);
+        })
+      );
+      //   const savedOrder = await axios.post('/api/order/save-order', {
+      //     user: userId,
+      //     product: id,
+      //     quantity,
+      //     price,
+      //     shippingAddress: addressId,
+      //     totalAmount: price * quantity,
+      //   })
+      //   console.log(savedOrder);
     } catch (error) {
       console.error("Checkout error:", error);
     }

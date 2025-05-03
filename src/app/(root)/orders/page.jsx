@@ -1,14 +1,63 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OrderList } from "@/components/root/OrderList";
-import { orders } from "@/data/order";
+// import { orders } from "@/data/order";
+import { useQuery } from "@tanstack/react-query";
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+
+const fetchOrder = async (userId) => {
+  try {
+    const res = await axios.get("/api/order/get-orders", {
+      params: { userId },
+    });
+    return res.data.orders;
+  } catch (error) {
+    console.log("Fetch orders error:", error);
+    return [];
+  }
+};
 
 export default function MyOrdersPage() {
-  const [selectedOrder, setSelectedOrder] = useState(orders[0]);
+  const { user, isLoaded } = useUser();
+  const [userId, setUserId] = useState(null);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+
+  useEffect(() => {
+    const getUserId = async () => {
+      if (!isLoaded || !user) return;
+      const email = user?.emailAddresses[0]?.emailAddress;
+      try {
+        const dbUser = await axios.get("/api/user-routes/get-user-by-email", {
+          params: { email },
+        });
+        const _id = dbUser?.data?.user?._id;
+        setUserId(_id);
+      } catch (error) {
+        console.log("Fetch userId error:", error);
+      }
+    };
+
+    getUserId();
+  }, [user, isLoaded]);
+
+
+  const { data: orders = [] } = useQuery({
+    queryKey: ["orderss"],
+    queryFn: () => fetchOrder(userId),
+    enabled: !!userId,
+  });
+
+  useEffect(() => {
+    if (orders.length > 0 && !selectedOrder) {
+      setSelectedOrder(orders[0]);
+    }
+  }, [orders]);
 
   const handleSelectOrder = (order) => {
     setSelectedOrder(order);
   };
+
 
   return (
     <div className="container mx-auto py-6 sm:px-8 px-3">
@@ -16,7 +65,7 @@ export default function MyOrdersPage() {
         <h1 className="text-3xl font-bold tracking-tight">My Orders</h1>
       </div>
 
-      <OrderList 
+      <OrderList
         orders={orders}
         selectedOrder={selectedOrder}
         onSelectOrder={handleSelectOrder}

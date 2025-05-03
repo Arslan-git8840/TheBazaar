@@ -1,7 +1,20 @@
+'use client';
 import React from 'react'
 import { Button } from '../ui/button'
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+
+const fetchCustomer = async () => {
+    const res = await axios.get("/api/user-routes/get-all-users");
+    return res.data.users;
+}
 
 function Customerlist() {
+
+    const { data, isLoading } = useQuery({
+        queryKey: ["customerList"],
+        queryFn: fetchCustomer,
+    });
 
     const customers = [
         {
@@ -103,13 +116,13 @@ function Customerlist() {
                     <table className="w-full min-w-[700px] border-separate border-spacing-y-1 text-sm text-[#0a1217]">
                         <thead>
                             <tr className="text-left text-[#0a1217] font-semibold select-none">
-                                <th className="w-10 pl-3">
+                                {/* <th className="w-10 pl-3">
                                     <input
                                         aria-label="Select all customers"
                                         type="checkbox"
                                         className="w-4 h-4 rounded border border-[#d9d9d9] checked:bg-[#0a1217] checked:border-[#0a1217]"
                                     />
-                                </th>
+                                </th> */}
                                 <th className="w-36">Customer</th>
                                 <th className="w-36">Email</th>
                                 <th className="w-20">Status</th>
@@ -118,27 +131,27 @@ function Customerlist() {
                             </tr>
                         </thead>
                         <tbody>
-                            {customers.map((customer) => (
+                            {data?.map((customer) => (
                                 <tr
-                                    key={customer.id}
-                                    className={`${customer.selected ? "bg-white rounded-lg shadow-sm" : ""}`}
+                                    key={customer._id}
+                                    className="hover:bg-[#ffffff] cursor-pointer"
                                 >
-                                    <td className="pl-3">
+                                    {/* <td className="pl-3">
                                         <input
                                             aria-label={`Select customer ${customer.id}`}
                                             type="checkbox"
                                             defaultChecked={customer.selected}
                                             className={`w-4 h-4 rounded border border-[#d9d9d9] ${customer.selected ? "checked:bg-[#0a1217] checked:border-[#0a1217]" : ""}`}
                                         />
-                                    </td>
+                                    </td> */}
                                     <td className="py-2 font-semibold">{customer.name}</td>
                                     <td>{customer.email}</td>
                                     <td>
-                                        <span className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${customer.statusColor}`}>
-                                            {customer.status}
+                                        <span className={`inline-block rounded px-2 py-0.5 text-xs font-semibold bg-green-200`}>
+                                            Active
                                         </span>
                                     </td>
-                                    <td>{customer.dateJoined}</td>
+                                    <td>{new Date(customer.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
                                     <td className="pr-3 cursor-pointer select-none">...</td>
                                 </tr>
                             ))}

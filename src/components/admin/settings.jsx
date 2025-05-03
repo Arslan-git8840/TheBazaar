@@ -16,7 +16,7 @@ export default function AdminSettings() {
           />
           <div className="flex flex-col items-center gap-2 sm:gap-4 w-full sm:w-auto justify-between">
             <Button className="bg-[#0f1b3f] text-white w-full sm:w-auto">Upload New</Button>
-            <div className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium">Johnathan</div>
+            <div className="bg-orange-500 text-white px-4 py-2 rounded-full text-sm font-medium">John</div>
           </div>
         </div>
 
@@ -58,7 +58,7 @@ export default function AdminSettings() {
           <div className="flex-1 space-y-6 w-full">
             <div>
               <h2 className="text-lg sm:text-xl font-semibold text-[#0f1b3f]">
-                Johnathan May <span className="text-red-400 text-sm ml-2 cursor-pointer">(Change)</span>
+                John Doe <span className="text-red-400 text-sm ml-2 cursor-pointer">(Change)</span>
               </h2>
             </div>
 

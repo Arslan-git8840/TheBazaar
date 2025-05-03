@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
-import { Product } from "@/database/schema/product";
+import { User } from "@/database/schema/user.model";
 import { dbConnect } from "@/database/dbConnect";
 
 export async function GET(req) {
   try {
     await dbConnect();
 
-    const productss = await Product.find({});
+    const users = await User.find({});
 
-    if (productss.length === 0) {
+    if (users.length === 0) {
       return NextResponse.json(
         {
           success: false,
@@ -21,7 +21,7 @@ export async function GET(req) {
     return NextResponse.json(
       {
         success: true,
-        productss,
+        users,
       },
       { status: 200 }
     );

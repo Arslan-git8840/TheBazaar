@@ -1,10 +1,5 @@
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from "@clerk/nextjs";
 import "./globals.css";
 import { Poppins, Urbanist } from "next/font/google";
@@ -22,11 +17,6 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${font.className}`}>
-          {/* <header>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </header> */}
           <Provider>{children}</Provider>
         </body>
       </html>

@@ -1,138 +1,10 @@
+'use client';
+import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
-const orders = [
-    {
-        id: "#390561",
-        customer: "Michelle Black",
-        status: "Paid",
-        total: "$780.00",
-        date: "Jan 8",
-        img: "https://storage.googleapis.com/a1aa/image/a9a2b5cf-cfe1-4b7b-397f-26701760875d.jpg",
-        statusColor: "bg-[#fff176] text-[#5a4d00]",
-        selected: false,
-    },
-    {
-        id: "#663334",
-        customer: "Janice Chandler",
-        status: "Delivered",
-        total: "$1,250.00",
-        date: "Jan 6",
-        img: "https://storage.googleapis.com/a1aa/image/e8123ad2-8373-4d02-a737-545b5a880010.jpg",
-        statusColor: "bg-[#f4a261] text-[#6b3f00]",
-        selected: false,
-    },
-    {
-        id: "#418135",
-        customer: "Mildred Hall",
-        status: "Paid",
-        total: "$540.95",
-        date: "Jan 5",
-        img: "https://storage.googleapis.com/a1aa/image/26a21450-f6ef-41be-f7a0-92ee1c567c25.jpg",
-        statusColor: "bg-[#fff176] text-[#5a4d00]",
-        selected: true,
-    },
-    {
-        id: "#801999",
-        customer: "Ana Carter",
-        status: "Paid",
-        total: "$1,489.00",
-        date: "Jan 2",
-        img: "https://storage.googleapis.com/a1aa/image/e51ffa2b-0349-4547-8b05-e0e381d23e26.jpg",
-        statusColor: "bg-[#fff176] text-[#5a4d00]",
-        selected: false,
-    },
-    {
-        id: "#517783",
-        customer: "John Sherman",
-        status: "Completed",
-        total: "$925.00",
-        date: "Dec 28",
-        img: "https://storage.googleapis.com/a1aa/image/586e7ba3-d132-4c79-c5b2-a47d19057932.jpg",
-        statusColor: "bg-[#a6f4c5] text-[#064e3b]",
-        selected: false,
-    },
-    // {
-    //     id: "#602992",
-    //     customer: "James Miller",
-    //     status: "Paid",
-    //     total: "$1,620.00",
-    //     date: "Dec 26",
-    //     img: "https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg",
-    //     statusColor: "bg-[#fff176] text-[#5a4d00]",
-    //     selected: true,
-    // },
-    // {
-    //     id: "#730345",
-    //     customer: "Travis French",
-    //     status: "Paid",
-    //     total: "$315.50",
-    //     date: "Dec 22",
-    //     img: "https://storage.googleapis.com/a1aa/image/45bc4602-4060-4a3d-6b02-a81ebc812d86.jpg",
-    //     statusColor: "bg-[#fff176] text-[#5a4d00]",
-    //     selected: true,
-    // },
-    // {
-    //     id: "#126955",
-    //     customer: "Ralph Hall",
-    //     status: "Paid",
-    //     total: "$1,267.45",
-    //     date: "Dec 20",
-    //     img: "https://storage.googleapis.com/a1aa/image/746a8ccd-12d1-4fca-654e-10eb179c3a8a.jpg",
-    //     statusColor: "bg-[#fff176] text-[#5a4d00]",
-    //     selected: false,
-    // },
-    // {
-    //     id: "#045321",
-    //     customer: "Gary Gilbert",
-    //     status: "Completed",
-    //     total: "$287.00",
-    //     date: "Dec 18",
-    //     img: "https://storage.googleapis.com/a1aa/image/dfffcac1-7201-48be-3865-386ee87b5270.jpg",
-    //     statusColor: "bg-[#a6f4c5] text-[#064e3b]",
-    //     selected: true,
-    // },
-    // {
-    //     id: "#082848",
-    //     customer: "Frances Howell",
-    //     status: "Delivered",
-    //     total: "$1,740.00",
-    //     date: "Dec 17",
-    //     img: "https://storage.googleapis.com/a1aa/image/cdb094d4-7954-4b32-9afd-aa1e7be42ce1.jpg",
-    //     statusColor: "bg-[#f4a261] text-[#6b3f00]",
-    //     selected: false,
-    // },
-    // {
-    //     id: "#646072",
-    //     customer: "Herbert Boyd",
-    //     status: "Paid",
-    //     total: "$714.00",
-    //     date: "Dec 14",
-    //     img: "https://storage.googleapis.com/a1aa/image/8cdefe51-e33e-4db0-d34c-3a4967b67bee.jpg",
-    //     statusColor: "bg-[#fff176] text-[#5a4d00]",
-    //     selected: false,
-    // },
-    // {
-    //     id: "#432019",
-    //     customer: "Alan White",
-    //     status: "Paid",
-    //     total: "$267.65",
-    //     date: "Dec 13",
-    //     img: "https://storage.googleapis.com/a1aa/image/f3db1778-1a59-4c48-3814-e2e8b8676e3b.jpg",
-    //     statusColor: "bg-[#fff176] text-[#5a4d00]",
-    //     selected: false,
-    // },
-    // {
-    //     id: "#985927",
-    //     customer: "Julie Martin",
-    //     status: "Delivered",
-    //     total: "$389.00",
-    //     date: "Dec 11",
-    //     img: "https://storage.googleapis.com/a1aa/image/2eef6c85-cca5-48e6-e522-e659b329ed97.jpg",
-    //     statusColor: "bg-[#f4a261] text-[#6b3f00]",
-    //     selected: false,
-    // },
-];
+
 
 const orderItems = [
     {
@@ -167,7 +39,25 @@ const orderItems = [
     },
 ];
 
+const fetchOrder = async () => {
+    const res = await axios.get("/api/order/get-all-orders");
+    return res.data.orders;
+}
+
 export default function Orderlist() {
+
+    const statusColors = {
+        processing: "bg-yellow-300 text-yellow-700",
+        cancelled: "bg-red-300 text-red-700",
+        shipped: "bg-blue-300 text-blue-700",
+        delivered: "bg-green-300 text-green-700",
+    };
+
+    const { data, isLoading } = useQuery({
+        queryKey: ["orders"],
+        queryFn: fetchOrder,
+    });
+
     return (
         <div className="flex flex-col md:flex-row w-full rounded-[16px] border-2 border-[#0a1217] border-dashed overflow-x-scroll bg-[#f3f4e9] hide-scrollbar">
             {/* Sidebar */}
@@ -327,14 +217,14 @@ export default function Orderlist() {
                     <table className="w-full min-w-[700px] border-separate border-spacing-y-1 text-sm text-[#0a1217]">
                         <thead>
                             <tr className="text-left text-[#0a1217] font-semibold select-none">
-                                <th className="w-10 pl-3">
+                                {/* <th className="w-10 pl-3">
                                     <input
                                         aria-label="Select all orders"
                                         type="checkbox"
                                         className="w-4 h-4 rounded border border-[#d9d9d9] checked:bg-[#0a1217] checked:border-[#0a1217]"
                                     />
-                                </th>
-                                <th className="w-24">Order</th>
+                                </th> */}
+                                <th className="w-46">Order</th>
                                 <th className="w-36">Customer</th>
                                 <th className="w-20">Status</th>
                                 <th className="w-24">Total</th>
@@ -343,43 +233,42 @@ export default function Orderlist() {
                             </tr>
                         </thead>
                         <tbody>
-                            {orders.map((order) => (
+                            {data?.map((order) => (
                                 <tr
-                                    key={order.id}
-                                    className={`${order.selected ? "bg-white rounded-lg shadow-sm" : ""
-                                        }`}
+                                    key={order._id}
                                 >
-                                    <td className="pl-3">
+                                    {/* <td className="pl-3">
                                         <input
                                             aria-label={`Select order ${order.id}`}
                                             type="checkbox"
                                             defaultChecked={order.selected}
                                             className={`w-4 h-4 rounded border border-[#d9d9d9] ${order.selected
-                                                    ? "checked:bg-[#0a1217] checked:border-[#0a1217]"
-                                                    : ""
+                                                ? "checked:bg-[#0a1217] checked:border-[#0a1217]"
+                                                : ""
                                                 }`}
                                         />
-                                    </td>
-                                    <td className="py-2 font-semibold">{order.id}</td>
+                                    </td> */}
+                                    <td className="py-2 font-semibold">{order.product.name}</td>
                                     <td className="flex items-center space-x-2">
                                         <img
-                                            alt={`Profile picture of ${order.customer}`}
+                                            alt={`Profile picture of ${order.product._id}`}
                                             className="w-6 h-6 rounded-full object-cover"
                                             height="24"
-                                            src={order.img}
+                                            src={'https://storage.googleapis.com/a1aa/image/e8123ad2-8373-4d02-a737-545b5a880010.jpg'}
                                             width="24"
                                         />
-                                        <span>{order.customer}</span>
+                                        <span>{order.user.name}</span>
                                     </td>
                                     <td>
                                         <span
-                                            className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${order.statusColor}`}
+                                            className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${statusColors[order.orderStatus] || "bg-gray-300 text-gray-700"}`}
                                         >
-                                            {order.status}
+                                            {order.orderStatus}
                                         </span>
                                     </td>
-                                    <td className="font-semibold">{order.total}</td>
-                                    <td>{order.date}</td>
+
+                                    <td className="font-semibold">${order.totalAmount}</td>
+                                    <td>{new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</td>
                                     <td className="pr-3 cursor-pointer select-none">...</td>
                                 </tr>
                             ))}
@@ -480,3 +369,136 @@ export default function Orderlist() {
         </div>
     );
 }
+
+// const orders = [
+//     {
+//         id: "#390561",
+//         customer: "Michelle Black",
+//         status: "Paid",
+//         total: "$780.00",
+//         date: "Jan 8",
+//         img: "https://storage.googleapis.com/a1aa/image/a9a2b5cf-cfe1-4b7b-397f-26701760875d.jpg",
+//         statusColor: "bg-[#fff176] text-[#5a4d00]",
+//         selected: false,
+//     },
+//     {
+//         id: "#663334",
+//         customer: "Janice Chandler",
+//         status: "Delivered",
+//         total: "$1,250.00",
+//         date: "Jan 6",
+//         img: "https://storage.googleapis.com/a1aa/image/e8123ad2-8373-4d02-a737-545b5a880010.jpg",
+//         statusColor: "bg-[#f4a261] text-[#6b3f00]",
+//         selected: false,
+//     },
+//     {
+//         id: "#418135",
+//         customer: "Mildred Hall",
+//         status: "Paid",
+//         total: "$540.95",
+//         date: "Jan 5",
+//         img: "https://storage.googleapis.com/a1aa/image/26a21450-f6ef-41be-f7a0-92ee1c567c25.jpg",
+//         statusColor: "bg-[#fff176] text-[#5a4d00]",
+//         selected: true,
+//     },
+//     {
+//         id: "#801999",
+//         customer: "Ana Carter",
+//         status: "Paid",
+//         total: "$1,489.00",
+//         date: "Jan 2",
+//         img: "https://storage.googleapis.com/a1aa/image/e51ffa2b-0349-4547-8b05-e0e381d23e26.jpg",
+//         statusColor: "bg-[#fff176] text-[#5a4d00]",
+//         selected: false,
+//     },
+//     {
+//         id: "#517783",
+//         customer: "John Sherman",
+//         status: "Completed",
+//         total: "$925.00",
+//         date: "Dec 28",
+//         img: "https://storage.googleapis.com/a1aa/image/586e7ba3-d132-4c79-c5b2-a47d19057932.jpg",
+//         statusColor: "bg-[#a6f4c5] text-[#064e3b]",
+//         selected: false,
+//     },
+//     // {
+//     //     id: "#602992",
+//     //     customer: "James Miller",
+//     //     status: "Paid",
+//     //     total: "$1,620.00",
+//     //     date: "Dec 26",
+//     //     img: "https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg",
+//     //     statusColor: "bg-[#fff176] text-[#5a4d00]",
+//     //     selected: true,
+//     // },
+//     // {
+//     //     id: "#730345",
+//     //     customer: "Travis French",
+//     //     status: "Paid",
+//     //     total: "$315.50",
+//     //     date: "Dec 22",
+//     //     img: "https://storage.googleapis.com/a1aa/image/45bc4602-4060-4a3d-6b02-a81ebc812d86.jpg",
+//     //     statusColor: "bg-[#fff176] text-[#5a4d00]",
+//     //     selected: true,
+//     // },
+//     // {
+//     //     id: "#126955",
+//     //     customer: "Ralph Hall",
+//     //     status: "Paid",
+//     //     total: "$1,267.45",
+//     //     date: "Dec 20",
+//     //     img: "https://storage.googleapis.com/a1aa/image/746a8ccd-12d1-4fca-654e-10eb179c3a8a.jpg",
+//     //     statusColor: "bg-[#fff176] text-[#5a4d00]",
+//     //     selected: false,
+//     // },
+//     // {
+//     //     id: "#045321",
+//     //     customer: "Gary Gilbert",
+//     //     status: "Completed",
+//     //     total: "$287.00",
+//     //     date: "Dec 18",
+//     //     img: "https://storage.googleapis.com/a1aa/image/dfffcac1-7201-48be-3865-386ee87b5270.jpg",
+//     //     statusColor: "bg-[#a6f4c5] text-[#064e3b]",
+//     //     selected: true,
+//     // },
+//     // {
+//     //     id: "#082848",
+//     //     customer: "Frances Howell",
+//     //     status: "Delivered",
+//     //     total: "$1,740.00",
+//     //     date: "Dec 17",
+//     //     img: "https://storage.googleapis.com/a1aa/image/cdb094d4-7954-4b32-9afd-aa1e7be42ce1.jpg",
+//     //     statusColor: "bg-[#f4a261] text-[#6b3f00]",
+//     //     selected: false,
+//     // },
+//     // {
+//     //     id: "#646072",
+//     //     customer: "Herbert Boyd",
+//     //     status: "Paid",
+//     //     total: "$714.00",
+//     //     date: "Dec 14",
+//     //     img: "https://storage.googleapis.com/a1aa/image/8cdefe51-e33e-4db0-d34c-3a4967b67bee.jpg",
+//     //     statusColor: "bg-[#fff176] text-[#5a4d00]",
+//     //     selected: false,
+//     // },
+//     // {
+//     //     id: "#432019",
+//     //     customer: "Alan White",
+//     //     status: "Paid",
+//     //     total: "$267.65",
+//     //     date: "Dec 13",
+//     //     img: "https://storage.googleapis.com/a1aa/image/f3db1778-1a59-4c48-3814-e2e8b8676e3b.jpg",
+//     //     statusColor: "bg-[#fff176] text-[#5a4d00]",
+//     //     selected: false,
+//     // },
+//     // {
+//     //     id: "#985927",
+//     //     customer: "Julie Martin",
+//     //     status: "Delivered",
+//     //     total: "$389.00",
+//     //     date: "Dec 11",
+//     //     img: "https://storage.googleapis.com/a1aa/image/2eef6c85-cca5-48e6-e522-e659b329ed97.jpg",
+//     //     statusColor: "bg-[#f4a261] text-[#6b3f00]",
+//     //     selected: false,
+//     // },
+// ];

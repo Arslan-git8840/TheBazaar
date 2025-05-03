@@ -3,10 +3,21 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Minus, Plus, ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import axios from "axios";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useEContext } from "@/context/context";
 // import { useToast } from "@/hooks/use-toast";
 
 
 const ProductInfo = ({ product }) => {
+
+  const { cartsItems, setCartsItems } = useEContext();
+  const { user } = useUser();
+  const router = useRouter();
+  console.log(user);
+  const email = user.emailAddresses[0]?.emailAddress;
+
   //   const { toast } = useToast();
   const [quantity, setQuantity] = useState(1);
   // const [selectedColor, setSelectedColor] = useState(product.colors[0]);
@@ -23,7 +34,21 @@ const ProductInfo = ({ product }) => {
     }
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
+    try {
+      const res = await axios.get('/api/user-routes/get-user-by-email', {
+        params: { email }
+      })
+
+      const userId = res?.data?.user?._id;
+      const cartItem = await axios.post('/api/add-to-cart', {
+        userId, productId: product._id, quantity
+      })
+      if (cartItem) router.push(`/cart/${userId}`)
+    } catch (error) {
+      console.log('')
+    }
+
     // toast({
     //   title: "Added to cart",
     //   description: `${quantity} x ${product.name} (${selectedColor.name})`,
@@ -31,6 +56,17 @@ const ProductInfo = ({ product }) => {
   };
 
   const handleBuyNow = () => {
+
+    const productDetails = [{
+      productId: product._id,
+      quantity,
+      price: product.price,
+      totalPrice: product.price * quantity
+    }];
+
+    setCartsItems(productDetails);
+    console.log(cartsItems);
+
     // toast({
     //   title: "Proceeding to checkout",
     //   description: `Preparing ${quantity} x ${product.name} for purchase`,
@@ -126,22 +162,21 @@ const ProductInfo = ({ product }) => {
       </div>
 
       <div className="flex gap-4 pt-4">
-        <Link href={`/checkout/${product.slug}q${product._id}q${quantity}q${product?.price}`}>
+        <Link href={'/checkout'}>
           <Button
             className="bg-green-800 hover:bg-green-900 text-white flex-1 py-6"
             onClick={handleBuyNow}
           >
             Buy Now
-          </Button></Link>
-
-        <Link href={`/cart/${product?.slug}`}>
-          <Button
-            variant="outline"
-            className="flex-1 py-6 border-gray-300"
-            onClick={handleAddToCart}
-          >
-            Add to Cart
-          </Button></Link>
+          </Button>
+        </Link>
+        <Button
+          variant="outline"
+          className="flex-1 py-6 border-gray-300"
+          onClick={handleAddToCart}
+        >
+          Add to Cart
+        </Button>
 
       </div>
 
@@ -179,7 +214,7 @@ const ProductInfo = ({ product }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 
