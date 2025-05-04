@@ -1,81 +1,82 @@
-'use client';
-
-import ProductSection from "@/components/root/product/ProductSection";
-import { useSearchParams } from 'next/navigation';
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import { Suspense } from "react";
-
-const fetchProductsBySearch = async (query) => {
-  if (!query) return [];
-  const { data } = await axios.get("/api/product-search", {
-    params: { q: query },
-  });
-  if (!data.success) throw new Error(data.message);
-  return data.products;
-};
-
-function ProductClientPage() {
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get('q');
-
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["search-products", searchQuery],
-    queryFn: () => fetchProductsBySearch(searchQuery),
-    enabled: !!searchQuery, 
-  });
-
-  if (!searchQuery) return <p>Please enter a search term.</p>;
-  if (isLoading) return <p>Loading search results...</p>;
-  if (error) return <p>Error fetching search results.</p>;
-
-  return (
-    <div>
-      <h1>Search Result for: {searchQuery}</h1>
-      <ProductSection seeAllLink="/popular-products" products={data} />
-    </div>
-  );
-}
-
-export default function Page() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <ProductClientPage />
-    </Suspense>
-  );
-}
-
-
 // 'use client';
 
 // import ProductSection from "@/components/root/product/ProductSection";
 // import { useSearchParams } from 'next/navigation';
 // import { useQuery } from "@tanstack/react-query";
 // import axios from "axios";
-
-// export default function ProductClientPage() {
-// const searchParams = useSearchParams();
-// const searchQuery = searchParams.get('q');
+// import { Suspense } from "react";
 
 // const fetchProductsBySearch = async (query) => {
-// if (!query) return \[];
-// const { data } = await axios.get("/api/product-search", {
-// params: { q: query },
-// });
-// if (!data.success) throw new Error(data.message);
-// return data.products;
+//   if (!query) return [];
+//   const { data } = await axios.get("/api/product-search", {
+//     params: { q: query },
+//   });
+//   if (!data.success) throw new Error(data.message);
+//   return data.products;
 // };
 
-// const { data, isLoading, error } = useQuery({
-// queryKey: \["search-products", searchQuery],
-// queryFn: () => fetchProductsBySearch(searchQuery),
-// enabled: !!searchQuery,
-// });
+// function ProductClientPage() {
+//   const searchParams = useSearchParams();
+//   const searchQuery = searchParams.get('q');
 
-// if (!searchQuery) return <p>Please enter a search term.</p>;
-// if (isLoading) return <p>Loading search results...</p>;
-// if (error) return <p>Error fetching search results.</p>;
+//   const { data, isLoading, error } = useQuery({
+//     queryKey: ["search-products", searchQuery],
+//     queryFn: () => fetchProductsBySearch(searchQuery),
+//     enabled: !!searchQuery, 
+//   });
 
-// return ( <div> <h1>Search Result for: {searchQuery}</h1> <ProductSection seeAllLink="/popular-products" products={data} /> </div>
-// );
+//   if (!searchQuery) return <p>Please enter a search term.</p>;
+//   if (isLoading) return <p>Loading search results...</p>;
+//   if (error) return <p>Error fetching search results.</p>;
+
+//   return (
+//     <div>
+//       <h1>Search Result for: {searchQuery}</h1>
+//       <ProductSection seeAllLink="/popular-products" products={data} />
+//     </div>
+//   );
 // }
+
+// export default function Page() {
+//   return (
+//     <Suspense fallback={<div>Loading...</div>}>
+//       <ProductClientPage />
+//     </Suspense>
+//   );
+// }
+
+
+'use client';
+
+import ProductSection from "@/components/root/product/ProductSection";
+// import { useSearchParams } from 'next/navigation';
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+
+export default function ProductClientPage() {
+  // const searchParams = useSearchParams();
+  // const searchQuery = searchParams.get('q');
+
+  const searchQuery = 'bacca';
+  const fetchProductsBySearch = async (query) => {
+    if (!query) return [];
+    const { data } = await axios.get("/api/product-search", {
+      params: { q: query },
+    });
+    if (!data.success) throw new Error(data.message);
+    return data.products;
+  };
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["search-products", searchQuery],
+    queryFn: () => fetchProductsBySearch(searchQuery),
+    enabled: !!searchQuery,
+  });
+
+  if (!searchQuery) return <p>Please enter a search term.</p>;
+  if (isLoading) return <p>Loading search results...</p>;
+  if (error) return <p>Error fetching search results.</p>;
+
+  return (<div> <h1>Search Result for: {searchQuery}</h1> <ProductSection seeAllLink="/popular-products" products={data} /> </div>
+  );
+}
