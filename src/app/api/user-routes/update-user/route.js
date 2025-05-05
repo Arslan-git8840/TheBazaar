@@ -7,8 +7,9 @@ export async function POST(req) {
     await dbConnect();
 
     const body = await req.json();
+    const { userDetails } = body;
 
-    if (!body.userId) {
+    if (!userDetails._id) {
       return NextResponse.json(
         {
           success: false,
@@ -18,7 +19,7 @@ export async function POST(req) {
       );
     }
 
-    const user = await User.findById(body.userId);
+    const user = await User.findById(userDetails._id);
     if (!user) {
       return NextResponse.json(
         {
@@ -29,12 +30,13 @@ export async function POST(req) {
       );
     }
 
-    user.name = body.name || user.name;
-    user.email = body.email || user.email;
-    user.role = body.role || user.role;
-    user.phone = body.phone || user.phone;
-    user.addresses = body.addresses || user.addresses;
-    user.wishlist = body.wishlist || user.wishlist;
+    user.name = userDetails.name || user.name;
+    user.email = userDetails.email || user.email;
+    user.role = userDetails.role || user.role;
+    user.phone = userDetails.phone || user.phone;
+    user.addresses = userDetails.addresses || user.addresses;
+    user.wishlist = userDetails.wishlist || user.wishlist;
+    user.imageUrl = userDetails.imageUrl || user.imageUrl;
 
     await user.save();
 

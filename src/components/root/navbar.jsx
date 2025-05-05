@@ -50,11 +50,6 @@ const Navbar = () => {
     router.push(`/product?q=${searchValue}`)
   }
 
-  const paymentHandle = async () => {
-    const res = await axios.post('/api/stripe');
-    window.location.href = res.data.session.url;
-  }
-
   return (
     <nav className={`bg-white py-4 md:py-6 px-4 md:px-12 ${font.className}`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center gap-4">
@@ -63,7 +58,6 @@ const Navbar = () => {
             <img src="/icons/bazaar-logo.png" alt="Bazaar logo" className="w-36 min-w-[110px]" />
           </Link>
 
-          <button onClick={paymentHandle}>payment</button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center lg:space-x-8 space-x-4">

@@ -179,7 +179,7 @@ function Customerlist() {
                             alt="Profile picture of the customer"
                             className="w-16 h-16 rounded-full object-cover mb-2"
                             height="64"
-                            src="https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg" // Placeholder image
+                            src="https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg" 
                             width="64"
                         />
                         <p className="font-semibold text-[#0a1217] select-none">John Doe</p>

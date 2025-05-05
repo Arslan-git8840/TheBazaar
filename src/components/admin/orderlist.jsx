@@ -255,7 +255,7 @@ export default function Orderlist() {
                                             alt={`Profile picture of ${order.product._id}`}
                                             className="w-6 h-6 rounded-full object-cover"
                                             height="24"
-                                            src={'https://storage.googleapis.com/a1aa/image/e8123ad2-8373-4d02-a737-545b5a880010.jpg'}
+                                            src={order.user.imageUrl || "https://storage.googleapis.com/a1aa/image/3619ec21-ffa6-47fd-162f-5e4e7e15006e.jpg"}
                                             width="24"
                                         />
                                         <span>{order.user.name}</span>
@@ -269,7 +269,12 @@ export default function Orderlist() {
                                     </td>
                                     <td>
                                         <span
-                                            className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${statusColors[order.orderStatus] || "bg-gray-300 text-gray-700"}`}
+                                            className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${order.paymentStatus === "paid"
+                                                ? "bg-green-100 text-green-700"
+                                                : order.paymentStatus === "pending"
+                                                    ? "bg-yellow-100 text-yellow-700"
+                                                    : "bg-red-100 text-red-700"
+                                                }`}
                                         >
                                             {order.paymentStatus}
                                         </span>

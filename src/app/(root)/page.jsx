@@ -21,12 +21,14 @@ export default function RootPage() {
       const name = `${user.firstName} ${user.lastName}`;
       const email = user.emailAddresses?.[0]?.emailAddress;
       const phone = user.phoneNumbers?.[0]?.phoneNumber;
+      const imageUrl = user.imageUrl;
 
       try {
         await axios.post('/api/user-routes/save-user', {
           name,
           email,
-          phone
+          phone,
+          imageUrl,
         });
         console.log("User saved successfully");
       } catch (error) {
