@@ -34,7 +34,13 @@ const AccountPage = () => {
     });
   };
 
-  if (isLoading) return <div className="p-6">Loading...</div>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
+      </div>
+    );
+  }
   if (error) return <div className="p-6 text-red-500">Error fetching user</div>;
 
   return (

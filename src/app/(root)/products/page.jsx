@@ -71,6 +71,14 @@ function Products() {
     queryKey: ['recommendedProducts'],
     queryFn: fetchRecommendedProducts,
   });
+
+  if (loadingPopular) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
+      </div>
+    );
+  }
   return (
     <main className="flex-grow">
       <Banner />

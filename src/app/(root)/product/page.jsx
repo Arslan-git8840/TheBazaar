@@ -74,7 +74,13 @@ export default function ProductClientPage() {
   });
 
   if (!searchQuery) return <p>Please enter a search term.</p>;
-  if (isLoading) return <p>Loading search results...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
+      </div>
+    );
+  }
   if (error) return <p>Error fetching search results.</p>;
 
   return (<div> <h1>Search Result for: {searchQuery}</h1> <ProductSection seeAllLink="/popular-products" products={data} /> </div>

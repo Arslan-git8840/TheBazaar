@@ -49,8 +49,13 @@ const ProductDetail = ({ params }) => {
   });
 
 
-  if (isLoading)
-    return <p className="text-center py-10 text-gray-500">Loading product...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
+      </div>
+    );
+  }
 
   if (isError)
     return (

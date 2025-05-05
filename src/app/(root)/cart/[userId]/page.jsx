@@ -119,7 +119,13 @@ export default function CartPage() {
 
 
 
-  if (isLoading) return <p className="p-6">Loading...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-64">
+      <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
+    </div>
+    );
+  }
 
   return (
     <div className="container mx-auto py-6 sm:px-8 px-3">

@@ -42,7 +42,7 @@ export default function MyOrdersPage() {
   }, [user, isLoaded]);
 
 
-  const { data: orders = [] } = useQuery({
+  const { data: orders = [], isLoading } = useQuery({
     queryKey: ["orderss"],
     queryFn: () => fetchOrder(userId),
     enabled: !!userId,
@@ -65,11 +65,17 @@ export default function MyOrdersPage() {
         <h1 className="text-3xl font-bold tracking-tight">My Orders</h1>
       </div>
 
+      {isLoading ? (
+      <div className="flex justify-center items-center h-64">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-green-500"></div>
+      </div>
+    ) : (
       <OrderList
         orders={orders}
         selectedOrder={selectedOrder}
         onSelectOrder={handleSelectOrder}
       />
+    )}
     </div>
   );
 }
