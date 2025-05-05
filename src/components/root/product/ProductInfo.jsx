@@ -61,7 +61,9 @@ const ProductInfo = ({ product }) => {
       productId: product._id,
       quantity,
       price: product.price,
-      totalPrice: product.price * quantity
+      totalPrice: product.price * quantity,
+      thumbnail: product.thumbnail,
+      name: product.name  
     }];
 
     setCartsItems(productDetails);

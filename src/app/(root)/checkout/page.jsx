@@ -63,16 +63,38 @@ const Checkout = () => {
       await Promise.all(
         cartsItems.map(async (item) => {
           const savedOrder = await axios.post('/api/order/save-order', {
-            user: userId,  
-            product: item.productId,  
-            quantity: item.quantity, 
-            price: item.price,  
-            shippingAddress: addressId, 
-            totalAmount: item.totalPrice,  
+            user: userId,
+            product: item.productId,
+            quantity: item.quantity,
+            price: item.price,
+            shippingAddress: addressId,
+            totalAmount: item.totalPrice,
           });
           console.log(savedOrder);
         })
       );
+
+      // step-6 proceed to the payment page
+
+      const stripeResponse = await axios.post('/api/stripe', {
+        cartsItems
+      })
+
+      window.location.href = stripeResponse.data.session.url;
+
+      // step-7 update the payment status in db
+
+      const updateOrderPaymentStatus = await Promise.all(
+        cartsItems.map(async (item) => {
+          const updatedOrder = await axios.patch('/api/order/update-order-status', {
+            productId: item.productId,
+            paymentStatus: "paid"
+          });
+          console.log(updatedOrder);
+        })
+      )
+
+
       //   const savedOrder = await axios.post('/api/order/save-order', {
       //     user: userId,
       //     product: id,

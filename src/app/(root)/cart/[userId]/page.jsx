@@ -88,7 +88,9 @@ export default function CartPage() {
       quantity: item.quantity,
       price: item.product.price,
       totalPrice: item.product.price * item.quantity,
-      _id: item._id
+      _id: item._id,
+      thumbnail: item.product.thumbnail,
+      name: item.product.name
     }));
 
     setCartsItems(cleanedCart);

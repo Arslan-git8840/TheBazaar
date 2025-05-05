@@ -12,6 +12,7 @@ export function OrderList({ orders, selectedOrder, onSelectOrder }) {
               <th className="h-12 px-4 text-left align-middle font-medium"></th>
               <th className="h-12 px-4 text-left align-middle font-medium">Order</th>
               <th className="h-12 px-4 text-left align-middle font-medium">Status</th>
+              <th className="h-12 px-0 text-left align-middle font-medium">Payment</th>
               <th className="h-12 px-4 text-left align-middle font-medium">Total</th>
               <th className="h-12 px-4 text-left align-middle font-medium">Date</th>
               <th className="h-12 px-4 text-left align-middle font-medium"></th>
@@ -52,6 +53,20 @@ export function OrderList({ orders, selectedOrder, onSelectOrder }) {
                     {order.orderStatus}
                   </span>
                 </td>
+                <td>
+                  <span
+                    className={`inline-block rounded px-2 py-0.5 text-xs font-semibold
+      ${order.paymentStatus === "paid"
+                        ? "bg-green-100 text-green-700"
+                        : order.paymentStatus === "pending"
+                          ? "bg-yellow-100 text-yellow-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                  >
+                    {order.paymentStatus}
+                  </span>
+                </td>
+
                 <td className="p-4 align-middle">${order.product.price}</td>
                 <td className="p-4 align-middle"> {new Date(order.createdAt).toLocaleDateString("en-GB", {
                   day: "2-digit",

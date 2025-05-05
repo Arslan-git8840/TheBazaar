@@ -5,7 +5,7 @@ import {FileUploader} from '../fileUpload';
 
 const Footer = () => {
   return (
-    <footer className="w-full py-12 px-4 md:px-12 bg-gray-50">
+    <footer className="w-full md:py-12 py-6 px-4 md:px-12 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1 md:col-span-2">

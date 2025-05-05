@@ -2,7 +2,7 @@ import React from 'react';
 
 const TrendingSection = () => {
   return (
-    <section className="w-full py-12 px-4 md:px-12 bg-white">
+    <section className="w-full md:py-12 py-6 px-4 md:px-12 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="bg-[#2D3748] rounded-lg p-8">
           <h2 className="text-3xl text-white font-bold mb-4 flex items-center">

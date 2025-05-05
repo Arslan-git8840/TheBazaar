@@ -227,6 +227,7 @@ export default function Orderlist() {
                                 <th className="w-46">Order</th>
                                 <th className="w-36">Customer</th>
                                 <th className="w-20">Status</th>
+                                <th className="w-20">Payment</th>
                                 <th className="w-24">Total</th>
                                 <th className="w-20">Date</th>
                                 <th className="w-10 pr-3"></th>
@@ -264,6 +265,13 @@ export default function Orderlist() {
                                             className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${statusColors[order.orderStatus] || "bg-gray-300 text-gray-700"}`}
                                         >
                                             {order.orderStatus}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span
+                                            className={`inline-block rounded px-2 py-0.5 text-xs font-semibold ${statusColors[order.orderStatus] || "bg-gray-300 text-gray-700"}`}
+                                        >
+                                            {order.paymentStatus}
                                         </span>
                                     </td>
 
