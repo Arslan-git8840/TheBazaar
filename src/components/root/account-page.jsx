@@ -25,6 +25,8 @@ const AccountPage = () => {
     enabled: !!email,
   });
 
+  console.log(dbUser);
+
   const handleUpdateProfile = async (data) => {
     console.log(data);
     await axios.post('/api/user-routes/update-user', {
