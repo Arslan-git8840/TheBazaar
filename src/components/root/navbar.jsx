@@ -64,6 +64,7 @@ const Navbar = () => {
             <Link href="/" className="text-[#2D3748] font-medium">Home</Link>
             <Link href="/orders" className="text-[#2D3748] font-medium">Orders</Link>
             <Link href="/products" className="text-[#2D3748] font-medium">Products</Link>
+            {/* <Link href="/account" className="text-[#2D3748] font-medium">Account</Link> */}
           </div>
         </div>
 
@@ -115,6 +116,7 @@ const Navbar = () => {
             <Link href="/" className="text-[#2D3748] text-xl font-medium" onClick={() => setIsMenuOpen(false)}>Home</Link>
             <Link href="/orders" className="text-[#2D3748] text-xl font-medium" onClick={() => setIsMenuOpen(false)}>Orders</Link>
             <Link href="/products" className="text-[#2D3748] text-xl font-medium" onClick={() => setIsMenuOpen(false)}>Products</Link>
+            <Link href="/account" className="text-[#2D3748] text-xl font-medium" onClick={() => setIsMenuOpen(false)}>Account</Link>
 
             {/* Mobile Search */}
             <div className="mt-5 relative">
@@ -125,7 +127,7 @@ const Navbar = () => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
-              <Search className="absolute right-3 text-gray-500 w-5 h-5" />
+              <Search className="absolute right-3 bottom-[11px] text-gray-500 w-5 h-5" />
             </div>
           </div>
         </div>
