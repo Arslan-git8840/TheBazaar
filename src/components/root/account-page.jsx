@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ProfileTab } from "@/components/root/account/ProfileTab";
 // import { useToast } from "@/hooks/use-toast";
 
-const Index = () => {
+const AccountPage = () => {
   const [activeTab, setActiveTab] = useState("account");
   const { user } = useUser();
   const email = user?.emailAddresses[0]?.emailAddress;
@@ -62,4 +62,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default AccountPage;

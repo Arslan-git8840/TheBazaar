@@ -1,10 +1,10 @@
-import Index from '@/components/root/account-page'
+import AccountPage from '@/components/root/account-page'
 import React from 'react'
 
 function Page() {
   return (
     <div>
-        <Index/>
+        <AccountPage/>
     </div>
   )
 }
