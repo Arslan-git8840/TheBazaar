@@ -4,7 +4,7 @@ import { useUser } from '@clerk/nextjs';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ProfileTab } from "@/components/root/account/ProfileTab";
+import { ProfileTab } from "@/components/root/ProfileTab";
 // import { useToast } from "@/hooks/use-toast";
 
 const AccountPage = () => {

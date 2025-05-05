@@ -1,3 +1,4 @@
+'use client';
 import AccountPage from '@/components/root/account-page'
 import React from 'react'
 

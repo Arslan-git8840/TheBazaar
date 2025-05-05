@@ -34,8 +34,14 @@ export const ProfileTab = ({ user, onUpdate }) => {
 
         <div className="flex items-center gap-6">
           <Avatar className="h-24 w-24">
-            <AvatarImage src={user?.imageUrl || "https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg"} alt={user?.name} />
-            <AvatarFallback>{user?.name.substring(0, 2)}</AvatarFallback>
+            <AvatarImage
+              src={user?.imageUrl ?? "default-url.jpg"}
+              alt={user?.name ?? "User"}
+            />
+            <AvatarFallback>
+              {user?.name ? user.name.substring(0, 2) : "U"}
+            </AvatarFallback>
+
           </Avatar>
 
           <Button
