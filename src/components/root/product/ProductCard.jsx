@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
       <Link href={`/products/${product.slug}`} key={product.slug} className="block relative">
         <div className="h-48 overflow-hidden">
           <img
-            src={product.thumbnail || product.image}
+            src={product.images[0] || product.image}  // or product.thumbnail
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           />

@@ -17,7 +17,7 @@ const categories = [
     id: 3,
     name: "Home & Kitchen",
     image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?w=500&h=500&fit=crop",
-    link: "/home-kitchen"
+    link: "/home"
   },
   {
     id: 4,

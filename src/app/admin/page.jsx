@@ -10,24 +10,24 @@ export default function AdminPage() {
   const { user } = useUser();
   const email = user?.emailAddresses[0]?.emailAddress;
 
-  useEffect(() => {
-    const dbUser = async () => {
-      if (!email) return;
-      try {
-        const dbRes = await axios.get("/api/user-routes/get-user-by-email", {
-          params: { email },
-        });
-        const role = dbRes?.data?.user?.role;
-        if (role !== "admin") {
-          router.push("/");
-        }
-      } catch (error) {
-        console.log("Fetch userId error:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const dbUser = async () => {
+  //     if (!email) return;
+  //     try {
+  //       const dbRes = await axios.get("/api/user-routes/get-user-by-email", {
+  //         params: { email },
+  //       });
+  //       const role = dbRes?.data?.user?.role;
+  //       if (role !== "admin") {
+  //         router.push("/");
+  //       }
+  //     } catch (error) {
+  //       console.log("Fetch userId error:", error);
+  //     }
+  //   };
 
-    dbUser();
-  }, [email, router]);
+  //   dbUser();
+  // }, [email, router]);
 
   return (
     <div className="w-full flex flex-1">

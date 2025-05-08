@@ -1,6 +1,5 @@
 'use client';
 import ProductSection from "@/components/root/product/ProductSection";
-import { popularProducts } from "@/data/mockData";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -31,7 +30,7 @@ export default function Page({ params }) {
 
   return (
     <div>
-      <h1>Category: {category}</h1>
+      {/* <h1>Category: {category}</h1> */}
       <ProductSection
         seeAllLink="/popular-products"
         products={data}
