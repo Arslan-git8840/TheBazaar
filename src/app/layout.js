@@ -1,9 +1,8 @@
-import {
-  ClerkProvider,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 import { Poppins, Urbanist } from "next/font/google";
 import { Provider } from "@/tanstack/provider";
+import { Suspense } from "react";
 
 const font = Urbanist({ weight: ["400", "500"], subsets: ["latin"] });
 
@@ -17,7 +16,9 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${font.className}`}>
-          <Provider>{children}</Provider>
+          <Provider>
+            <Suspense>{children}</Suspense>
+          </Provider>
         </body>
       </html>
     </ClerkProvider>

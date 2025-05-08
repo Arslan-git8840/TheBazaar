@@ -49,15 +49,15 @@
 'use client';
 
 import ProductSection from "@/components/root/product/ProductSection";
-// import { useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 export default function ProductClientPage() {
-  // const searchParams = useSearchParams();
-  // const searchQuery = searchParams.get('q');
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get('q');
 
-  const searchQuery = 'bacca';
+  // const searchQuery = 'bacca';
   const fetchProductsBySearch = async (query) => {
     if (!query) return [];
     const { data } = await axios.get("/api/product-search", {
