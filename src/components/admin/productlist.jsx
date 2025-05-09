@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { Plus } from 'lucide-react';
+import { HeartHandshake, Plus } from 'lucide-react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
@@ -28,19 +28,17 @@ function ProductList() {
       <main className="flex-1 p-6 flex flex-col">
         <div className="flex items-center justify-between mb-6">
           <h1 className="text-xl font-semibold text-[#0a1217] select-none">Products</h1>
-          <div>
+          <div className="flex items-center space-x-3">
             <Link href="/admin/products/add">
-              <Button className="bg-[#3baa99] text-white px-4 py-2 rounded mt-4">
-                <Plus className="mr-2" /> Add
+              <Button className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-[#3baa99] flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]">
+                <Plus />
               </Button>
             </Link>
-          </div>
-          <div className="flex items-center space-x-3">
-            <Button className="w-9 h-9 border bg-white text-[#0a1217] hover:bg-[#f0f0f0]">
-              <i className="fas fa-plus"></i>
-            </Button>
-            <Button className="w-9 h-9 border bg-white text-[#0a1217] hover:bg-[#f0f0f0]">
-              <i className="fas fa-search"></i>
+            <Button
+              aria-label="Search"
+              className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-white flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]"
+            >
+              <HeartHandshake />
             </Button>
           </div>
         </div>
@@ -113,7 +111,7 @@ function ProductList() {
                 <img
                   alt="Product preview"
                   className="w-16 h-16 rounded-full object-cover mb-2"
-                  src={selectedProduct.thumbnail}
+                  src={selectedProduct.images[0]} // selectedProduct.thumbnail
                 />
                 <p className="font-semibold">{selectedProduct.name}</p>
                 <p className="text-sm text-[#6b7280]">{selectedProduct.category}</p>

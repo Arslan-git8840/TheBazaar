@@ -3,7 +3,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { Button } from "../ui/button";
-
+import { HeartHandshake } from "lucide-react";
 
 
 const orderItems = [
@@ -156,16 +156,10 @@ export default function Orderlist() {
                     </h1>
                     <div className="flex items-center space-x-3">
                         <Button
-                            aria-label="Messages"
-                            className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-white flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]"
-                        >
-                            <i className="far fa-envelope"></i>
-                        </Button>
-                        <Button
                             aria-label="Search"
                             className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-white flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]"
                         >
-                            <i className="fas fa-search"></i>
+                            <HeartHandshake/>
                         </Button>
                         <div className="flex items-center space-x-3 bg-white rounded-md px-3 py-1.5">
                             <img

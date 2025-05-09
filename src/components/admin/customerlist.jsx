@@ -3,6 +3,7 @@ import React from 'react'
 import { Button } from '../ui/button'
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { HeartHandshake } from 'lucide-react';
 
 const fetchCustomer = async () => {
     const res = await axios.get("/api/user-routes/get-all-users");
@@ -75,16 +76,10 @@ function Customerlist() {
                     </h1>
                     <div className="flex items-center space-x-3">
                         <Button
-                            aria-label="Messages"
-                            className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-white flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]"
-                        >
-                            <i className="far fa-envelope"></i>
-                        </Button>
-                        <Button
                             aria-label="Search"
                             className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-white flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]"
                         >
-                            <i className="fas fa-search"></i>
+                            <HeartHandshake />
                         </Button>
                     </div>
                 </div>
@@ -166,12 +161,12 @@ function Customerlist() {
                         <h2 className="font-semibold text-[#0a1217] text-lg select-none">
                             Customer Details
                         </h2>
-                        <button
-                            aria-label="Close customer details"
-                            className="text-[#6b7280] hover:text-[#0a1217] transition-colors"
+                        <Button
+                            aria-label="Search"
+                            className="w-9 h-9 rounded-md border border-[#d9d9d9] bg-white flex items-center justify-center text-[#0a1217] hover:bg-[#f0f0f0]"
                         >
-                            <i className="fas fa-times"></i>
-                        </button>
+                            <HeartHandshake />
+                        </Button>
                     </div>
 
                     <div className="flex flex-col items-center mb-6">
@@ -179,7 +174,7 @@ function Customerlist() {
                             alt="Profile picture of the customer"
                             className="w-16 h-16 rounded-full object-cover mb-2"
                             height="64"
-                            src="https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg" 
+                            src="https://storage.googleapis.com/a1aa/image/24ddd313-0be0-4330-8901-c1bfa7c021fc.jpg"
                             width="64"
                         />
                         <p className="font-semibold text-[#0a1217] select-none">John Doe</p>
