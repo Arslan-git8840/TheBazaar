@@ -10,7 +10,7 @@ const ProductSection = ({
     background = "bg-white"
 }) => {
     return (
-        <section className={`py-8 ${background}`}>
+        <section className={`md:py-4 py-2 ${background}`}>
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between mb-6">
                     <h2 className="text-2xl font-bold">{title}</h2>

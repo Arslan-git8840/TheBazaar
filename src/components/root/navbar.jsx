@@ -48,10 +48,11 @@ const Navbar = () => {
 
   const handleSearch = () => {
     router.push(`/product?q=${searchValue}`)
+    setIsMenuOpen(false);
   }
 
   return (
-    <nav className={`bg-white py-4 md:py-6 px-4 md:px-12 ${font.className}`}>
+    <nav className={`bg-white py-2 md:py-4 px-4 md:px-12 ${font.className}`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center gap-4">
         <div className="flex items-center">
           <Link href="/" className="mr-8">
@@ -127,7 +128,7 @@ const Navbar = () => {
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
               />
-              <Search className="absolute right-3 bottom-[11px] text-gray-500 w-5 h-5" />
+              <Search className="absolute right-3 bottom-[11px] text-gray-500 w-5 h-5" onClick={handleSearch} />
             </div>
           </div>
         </div>

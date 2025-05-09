@@ -83,6 +83,6 @@ export default function ProductClientPage() {
   }
   if (error) return <p>Error fetching search results.</p>;
 
-  return (<div> <h1>Search Result for: {searchQuery}</h1> <ProductSection seeAllLink="/popular-products" products={data} /> </div>
+  return (<div> <h1 className="pl-8">Search Result for: {searchQuery}</h1> <ProductSection seeAllLink="/popular-products" products={data} /> </div>
   );
 }
